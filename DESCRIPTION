@@ -1,0 +1,22 @@
+Package: sqlutils
+Type: Package
+Title: Utilities for working with SQL files.
+Version: 1.0
+Date: 2012-10-31
+Author: Jason Bryer
+Maintainer: Jason Bryer <jason@bryer.org>
+Description: This package provides utilities for working with a library of SQL
+    files.
+License: GPL
+Depends:
+    roxygen2,
+    stringr
+Collate:
+    'sqlutils-package.r'
+    'sqlPaths.r'
+    'sqldoc.r'
+    'cacheQuery.r'
+    'getParameters.r'
+    'getQueries.r'
+    'sqlexec.R'
+    'getSQL.r'

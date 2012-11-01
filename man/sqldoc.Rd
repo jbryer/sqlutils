@@ -1,0 +1,18 @@
+\name{sqldoc}
+\alias{sqldoc}
+\title{Parses the query and returns a list with all the elements of the comment.}
+\usage{
+  sqldoc(query)
+}
+\arguments{
+  \item{query}{the query name.}
+}
+\value{
+  a list with documentation including \code{introduction},
+  \code{return}, and \code{params} (as a data frame).
+}
+\description{
+  Parses the query and returns a list with all the elements
+  of the comment.
+}
+
