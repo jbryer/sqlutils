@@ -21,8 +21,7 @@ getSQL <- function(query=NULL, ...) {
 				warning(paste("The ", v, ' parameter has not been set. Using the default value of ',
 							  val, sep=''))
 			} else {
-				#TODO: This may actually need to be an error instead.
-				warning(paste("The ", v, 
+				stop(paste("The ", v, 
 					" parameter has not been set and no default value exists", sep=''))
 			}
 		}
