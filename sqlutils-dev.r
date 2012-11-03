@@ -25,13 +25,16 @@ getQueries()
 require(RSQLite)
 require(retention)
 data(students)
-data(graduates)
 m <- dbDriver("SQLite")
-dbfile <- 'sqlutils/data/students.db'
-conn <- dbConnect(m, dbname=dbfile)
-dbWriteTable(conn, "students", students[!is.na(students$CreatedDate) & 
-							students$CreatedDate > as.Date('2010-07-01'),])
-dbWriteTable(conn, "graduates", graduates[!is.na(graduates$GraduationDate) & 
-							graduates$GraduationDate > as.Date('2010-07-01'),])
+conn <- dbConnect(m, dbname='students.db')
+dbWriteTable(conn, "students", students[!is.na(students$CreatedDate),])
+q1 <- execQuery('StudentSummary', connection=conn)
+head(q1)
 
-execQuery('StudentSummary', connection=conn)
+#Excelsior test
+sqlPaths(paste(oDrive, '/R/ecir/data', sep=''))
+getQueries()
+sqldoc('WarehouseDataRange')
+
+
+
