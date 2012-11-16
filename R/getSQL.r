@@ -16,6 +16,7 @@ getSQL <- function(query=NULL, ...) {
 			if(!is.null(params) & length(params[params$param == v, 'default']) > 0 &
 					!is.na(params[params$param == v, 'default'])) {
 				val <- params[params$param == v, 'default']
+				val <- eval(parse(text=val))
 				parmvals = c(parmvals, val)
 				names(parmvals)[length(parmvals)] <- v
 				warning(paste("The ", v, ' parameter has not been set. Using the default value of ',

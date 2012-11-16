@@ -33,12 +33,13 @@ sqldoc <- function(query) {
 	
 	sqldoc <- c(parsed.introduction, parsed.elements)
 	if(length(getParameters(query)) > 0 & !is.na(getParameters(query)[1])) {
-		params <- data.frame(param=getParameters(query), desc=NA, default=NA)
+		params <- data.frame(param=getParameters(query), desc=NA, default=NA, default.val=NA)
 		for(l in sqldoc[names(sqldoc) == 'param']) {
 			params[params$param == l$name,]$desc <- l$description
 		}
 		for(l in sqldoc[names(sqldoc) == 'default']) {
 			params[params$param == l$name,]$default <- l$description
+			params[params$param == l$name,]$default.val <- eval(parse(text=l$description))
 		}
 		sqldoc$params <- params
 	}
