@@ -1,6 +1,7 @@
 #' Provides counts of all records by month.
-#' @return a summary of students by month.
-SELECT CreatedDate, count(StudentId) 
+#' @return CreatedDate the warehouse date.
+#' @return count the number of students enrolled as of the corresponding CreatedDate
+SELECT Date(CreatedDate), count(StudentId) AS count
 FROM students
 GROUP BY CreatedDate
 ORDER BY CreatedDate
