@@ -8,5 +8,4 @@
 #' @return StudentId the student id.
 SELECT * 
 FROM students 
-WHERE Date(CreatedDate) >= Date(':startDate:') AND 
-Date(CreatedDate) <= Date(':endDate:')
+WHERE CreatedDate >= ':startDate:' AND CreatedDate <= ':endDate:'
