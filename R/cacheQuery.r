@@ -6,19 +6,38 @@
 #'        current working directory (i.e. \code{\link{getwd}}.
 #' @param filename the filename of the cached data file.
 #' @param query the query to execute.
+#' @param maxLevels the maximum number of levels a factor can have before being
+#'        converted to a character.
 #' @param ... other parameters passed to the \code{execQuery} function including
 #'        query parameters.
+#' @param format either csv for comma separated value files or rda for R data files.
 #' @return a data frame.
 #' @export
 cacheQuery <- function(query=NULL, dir=getwd(), 
-					   filename=getCacheFilename(query=query, dir=dir, ...), ...) {
+					   filename=getCacheFilename(query=query, dir=dir, ext=format, ...), 
+					   format='csv', 
+					   maxLevels=20, 
+					   ...) {
 	if(file.exists(filename)) {
 		message(paste("Reading from cached query file: ", filename, sep=''))
-		df = read.csv(filename)
+		if(tolower(format) == 'rda') {
+			load(filename)
+		} else if(tolower(format) == 'csv') {
+			df = read.csv(filename)			
+		} else {
+			stop('Unsupported format type.')
+		}
+		df = recodeColumns(df, maxLevels)
 	} else {
 		message(paste("Executing ", query, " and saving to ", filename, sep=''))
-		df = execQuery(query=query, ...)
-		write.csv(df, filename, row.names=FALSE)
+		df = execQuery(query=query, maxLevels=maxLevels, ...)
+		if(tolower(format) == 'rda') {
+			save(df, file=filename)
+		} else if(tolower(format) == 'csv') {
+			write.csv(df, filename, row.names=FALSE)
+		} else {
+			stop('Unsupported format type.')
+		}
 	}
 	return(df)
 }
@@ -27,9 +46,11 @@ cacheQuery <- function(query=NULL, dir=getwd(),
 #' 
 #' @param query the query name.
 #' @param dir the directory to save the cache file to.
+#' @param ext file extension.
 #' @param ... query parameters.
 #' @return full filepath to the cached file.
-getCacheFilename <- function(query, dir=getwd(), ...) {
+#' @export
+getCacheFilename <- function(query, dir=getwd(), ext='csv', ...) {
 	parms = getParameters(query)
 	parmvals = unlist(list(...))
 	filename = paste(dir, '/', query, sep='')
@@ -38,6 +59,6 @@ getCacheFilename <- function(query, dir=getwd(), ...) {
 			filename = paste(filename, parms[i], parmvals[parms[i]], sep='.')
 		}
 	}
-	filename = paste(filename, 'csv', sep='.')
+	filename = paste(filename, ext, sep='.')
 	return(filename)
 }

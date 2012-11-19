@@ -6,7 +6,7 @@ and then saves a CSV file.}
 \usage{
   cacheQuery(query = NULL, dir = getwd(),
     filename = getCacheFilename(query = query, dir = dir, ...),
-    ...)
+    format = "rda", ...)
 }
 \arguments{
   \item{dir}{the directory to save and load cached data

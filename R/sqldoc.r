@@ -5,7 +5,7 @@
 #'         and \code{params} (as a data frame).
 #' @export
 sqldoc <- function(query) {
-	f <- sqlFile(query)
+	f <- sqlutils:::sqlFile(query)
 	if(is.null(f)) { stop(paste("Cannot find query file for ", query, sep='')) }
 	
 	sql = scan(f, what="character", 
@@ -33,7 +33,8 @@ sqldoc <- function(query) {
 	
 	sqldoc <- c(parsed.introduction, parsed.elements)
 	if(length(getParameters(query)) > 0 & !is.na(getParameters(query)[1])) {
-		params <- data.frame(param=getParameters(query), desc=NA, default=NA, default.val=NA)
+		params <- data.frame(param=getParameters(query), desc=NA, default=NA, default.val=NA, 
+							 stringsAsFactors=FALSE)
 		for(l in sqldoc[names(sqldoc) == 'param']) {
 			params[params$param == l$name,]$desc <- l$description
 		}
@@ -43,7 +44,14 @@ sqldoc <- function(query) {
 		}
 		sqldoc$params <- params
 	}
-	sqldoc <- sqldoc[!(names(sqldoc) %in% c('param', 'default'))]
+	returns <- data.frame(variable=character(), desc=character(), stringsAsFactors=FALSE)
+	for(l in sqldoc[names(sqldoc) == 'return']) {
+		returns <- rbind(returns, data.frame(
+			variable=l$name, desc=l$description, stringsAsFactors=FALSE))
+	}
+	
+	sqldoc <- sqldoc[!(names(sqldoc) %in% c('param', 'default', 'return'))]
+	sqldoc$returns <- returns
 	
 	class(sqldoc) <- c('sqldoc')
 	return(sqldoc)
@@ -56,14 +64,13 @@ sqldoc <- function(query) {
 print.sqldoc <- function(x, ...) {
 	cat(x$introduction)
 	cat('\n')
-	if(!is.null(x$return)) {
-		cat('Returns ')
-		cat(x$return)
-		cat('\n')
-	}
 	if(!is.null(x$params)) {
 		cat('Parameters:\n')
 		print(x$params, row.names=FALSE)
+	}
+	if(!is.null(x$returns)) {
+		cat('Returns (note that this list may not be complete):\n')
+		print(x$returns, row.names=FALSE)
 	}
 }
 
@@ -79,6 +86,7 @@ parse.element <- function(element, srcref) {
 	#TODO: This should only be done once when the package loads
 	preref.parsers <- roxygen2:::preref.parsers
 	preref.parsers[['default']] <- preref.parsers[['param']]
+	preref.parsers[['return']] <- preref.parsers[['param']]
 	
 	pieces <- str_split_fixed(element, "[[:space:]]+", 2)
 	
