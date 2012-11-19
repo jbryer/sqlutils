@@ -3,7 +3,7 @@ require(RSQLite)
 require(retention)
 
 data(students)
-students$CreatedDate = as.integer(as.Date(students$CreatedDate), origin='2000-01-01')
+students$CreatedDate = as.character(students$CreatedDate)
 m <- dbDriver("SQLite")
 tmpfile <- tempfile('students.db', fileext='.db')
 conn <- dbConnect(m, dbname=tmpfile)
