@@ -21,7 +21,7 @@ execQuery <- function(query=NULL, connection=NULL, maxLevels=20, ...) {
 #'        converted to a character.
 recodeColumns <- function(df, maxLevels=20) {
 	for(c in 1:ncol(df)) {
-		if(class(df[,c]) == 'factor' & length(levels(df[,c])) > maxLevels) {
+		if(class(df[,c])[1] == 'factor' & length(levels(df[,c])) > maxLevels) {
 			df[,c] = as.character(df[,c])
 		}
 	}
@@ -47,7 +47,7 @@ sqlexec <- function(connection, sql, ...) { UseMethod("sqlexec") }
 #' @S3method sqlexec RODBC
 #' @export
 sqlexec.RODBC <- function(connection, sql, ...) {
-	sqlQuery(connection, sql)
+	sqlQuery(connection, sql) #TODO: Why doesn't this work with ... passed through
 }
 
 #' Executes queries for RSQLite package.
