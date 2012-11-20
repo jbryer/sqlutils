@@ -47,7 +47,7 @@ sqlexec <- function(connection, sql, ...) { UseMethod("sqlexec") }
 #' @S3method sqlexec RODBC
 #' @export
 sqlexec.RODBC <- function(connection, sql, ...) {
-	sqlQuery(connection, sql, ...)
+	sqlQuery(connection, sql)
 }
 
 #' Executes queries for RSQLite package.
