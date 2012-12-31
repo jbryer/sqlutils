@@ -11,6 +11,8 @@ License: GPL
 Depends:
     roxygen2,
     stringr
+Suggests:
+    tcltk
 Collate:
     'sqlutils-package.r'
     'sqlPaths.r'
