@@ -2,12 +2,14 @@
 \alias{getCacheFilename}
 \title{Returns the complete filepath to the cache file.}
 \usage{
-  getCacheFilename(query, dir = getwd(), ...)
+  getCacheFilename(query, dir = getwd(), ext = "csv", ...)
 }
 \arguments{
   \item{query}{the query name.}
 
   \item{dir}{the directory to save the cache file to.}
+
+  \item{ext}{file extension.}
 
   \item{...}{query parameters.}
 }

@@ -20,3 +20,4 @@ Collate:
     'getQueries.r'
     'sqlexec.R'
     'getSQL.r'
+    'interactiveSQL.r'

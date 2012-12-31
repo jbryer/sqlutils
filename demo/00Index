@@ -1,1 +1,2 @@
 sqlutils 	Creates a database with two tables and demonstrates how to use the included queries.
+isql 	This demo will setup a database for using the interactive SQL mode.
