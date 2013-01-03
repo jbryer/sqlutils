@@ -49,6 +49,8 @@ isql <- function(conn, sql = character(), ...) {
 				assign(dfname, df, envir=.GlobalEnv)
 				cat(paste('Data frame ', dfname, ' saved to global environment\n', sep=''))
 			}
+		} else if(line == 'result') {
+			print(df)
 		} else if(line == 'edit') {
 			require(tcltk)
 			OnOK <- function() {
@@ -79,9 +81,10 @@ isql <- function(conn, sql = character(), ...) {
 			cat('   edit         edit SQL in a separate text window\n')
 			cat('   print        print the last entered SQL statement\n')
 			cat('   exec         execute that last entered SQL statement\n')
+			cat('   result       prints the last results\n')
 			cat('   save [name]  save the last executed query to the global environment\n')
 		}
-		cat("SLQ>"); line <- readLines(n=1)
+		cat("SQL>"); line <- readLines(n=1)
 	}
 	
 	invisible(gsub("\n", " ", sql))
