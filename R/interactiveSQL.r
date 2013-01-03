@@ -81,7 +81,7 @@ isql <- function(conn, sql = character(), ...) {
 			cat('   exec         execute that last entered SQL statement\n')
 			cat('   save [name]  save the last executed query to the global environment\n')
 		}
-		cat("SLQ>"); line <- readLines(n=1)
+		cat("SQL>"); line <- readLines(n=1)
 	}
 	
 	invisible(gsub("\n", " ", sql))
