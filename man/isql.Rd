@@ -13,7 +13,9 @@
   \code{\link{sqlexec}}.}
 }
 \value{
-  returns the last entered SQL statement.
+  returns a list containing two character vectors, one with
+  a history of commands and another with a history of SQL
+  statements.
 }
 \description{
   This function will start an interactive SQL session. The

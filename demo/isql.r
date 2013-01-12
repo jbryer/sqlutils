@@ -1,5 +1,4 @@
 require(sqlutils)
-require(tcltk)
 require(RSQLite)
 require(retention)
 
@@ -10,4 +9,7 @@ tmpfile <- tempfile('students.db', fileext='.db')
 conn <- dbConnect(m, dbname=tmpfile)
 dbWriteTable(conn, "students", students[!is.na(students$CreatedDate),])
 
-isql(conn=conn, sql=getSQL('StudentSummary'))
+hist <- isql(conn=conn, sql=getSQL('StudentSummary'))
+names(hist)
+hist[['commands']]
+hist[['sql']]

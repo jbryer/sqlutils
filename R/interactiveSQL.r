@@ -7,15 +7,20 @@
 #' @param conn a database connection.
 #' @param sql initial SQL statement.
 #' @param ... other parameters passed to \code{\link{sqlexec}}.
-#' @return returns the last entered SQL statement.
+#' @return returns a list containing two character vectors, one with a history of
+#'        commands and another with a history of SQL statements.
 #' @export
 isql <- function(conn, sql = character(), ...) {
 	cat('Interactive SQL mode (type quit to exit, help for available commands)...\n')
 	
 	df <- NULL
+	history <- list()
+	history[['sql']] <- character()
+	history[['commands']] <- character()
 
 	cat("SQL>"); line <- readLines(n=1)
 	while(line != 'quit' & line != 'exit') {
+		history[['commands']] <- c(history[['commands']], line)
 		if(line == 'exec') {
 			if(length(sql) == 0) {
 				cat('No SQL to execute\n')
@@ -38,6 +43,7 @@ isql <- function(conn, sql = character(), ...) {
 				line <- readLines(n=1)
 			}
 			sql <- paste(sql, substr(line, 1, nchar(line)-1), sep='\n')
+			history[['sql']] <- c(history[['sql']], sql)
 		} else if(substr(line, 1, 4) == 'save') {
 			if(is.null(df)) {
 				cat('No data frame to save. Try exec first.')
@@ -52,26 +58,30 @@ isql <- function(conn, sql = character(), ...) {
 		} else if(line == 'result') {
 			print(df)
 		} else if(line == 'edit') {
-			require(tcltk)
-			OnOK <- function() {
-				sql <<- tclvalue(tkget(txt,"0.0","end"))
-				tkdestroy(tt)
+			if(require(tcltk)) {
+				OnOK <- function() {
+					sql <<- tclvalue(tkget(txt,"0.0","end"))
+					tkdestroy(tt)
+				}
+				OnCancel <- function() {
+					tkdestroy(tt)
+				}
+				tt  <- tktoplevel()
+				tkpack(tklabel(tt,text="SQL Entry"))	
+				txt <- tktext(tt)
+				tkmark.set(txt,"insert","0.0")
+				tkinsert(txt, "end", sql)
+				OK.button <- tkbutton(tt, text="OK", command=OnOK)
+				Cancel.button <- tkbutton(tt, text="Cancel", command=OnCancel)
+				tkpack(txt)
+				tkpack(OK.button, Cancel.button)
+				tkfocus(txt)
+				tkbind(tt, "<Destroy>", function() { tkgrab.release(tt) })
+				tkwait.window(tt)
+				history[['sql']] <- c(history[['sql']], sql)
+			} else {
+				cat("tcltk package did not load")
 			}
-			OnCancel <- function() {
-				tkdestroy(tt)
-			}
-			tt  <- tktoplevel()
-			tkpack(tklabel(tt,text="SQL Entry"))	
-			txt <- tktext(tt)
-			tkmark.set(txt,"insert","0.0")
-			tkinsert(txt, "end", sql)
-			OK.button <- tkbutton(tt, text="OK", command=OnOK)
-			Cancel.button <- tkbutton(tt, text="Cancel", command=OnCancel)
-			tkpack(txt)
-			tkpack(OK.button, Cancel.button)
-			tkfocus(txt)
-			tkbind(tt, "<Destroy>", function() { tkgrab.release(tt) })
-			tkwait.window(tt)
 		} else if(line == 'help') {
 			cat('   Command      Description\n')
 			cat('   ___________  ______________________________________________________\n')
@@ -87,6 +97,6 @@ isql <- function(conn, sql = character(), ...) {
 		cat("SQL>"); line <- readLines(n=1)
 	}
 	
-	invisible(gsub("\n", " ", sql))
+	invisible(history)
 }
 
