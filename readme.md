@@ -84,7 +84,7 @@ There are two functions available to execute queries, `execQuery` and `cacheQuer
 
 ### Supported databases
 
-The `sqlutils` package supports database access using the `RODBC`, `RSQLite`, and `RMySQL` packages using an S3 generic function call called `sqlexec` based upon the class of the `connection` parameter. For example, create a new database connection for connections of class `foo`, the following provides the skeleton of the function to implement:
+The `sqlutils` package supports database access using the [`RODBC`](http://cran.r-project.org/web/packages/RODBC/index.html), [`RSQLite`](http://cran.r-project.org/web/packages/RSQLite/index.html), [`RPostgreSQL`](http://cran.r-project.org/web/packages/RPostgreSQL/index.html), and [`RMySQL`](http://cran.r-project.org/web/packages/RMySQL/index.html) packages using an S3 generic function call called `sqlexec` based upon the class of the `connection` parameter. For example, create a new database connection for connections of class `foo`, the following provides the skeleton of the function to implement:
 
 	sqlexec.foo <- function(connection, sql, ...) {
 		#Database implementation here.

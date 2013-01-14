@@ -10,9 +10,14 @@ Description: This package provides utilities for working with a library of SQL
 License: GPL
 Depends:
     roxygen2,
-    stringr
+    stringr,
+    DBI
 Suggests:
-    tcltk
+    tcltk,
+    RPostgreSQL,
+    RODBC,
+    RMySQL,
+    RSQLite
 Collate:
     'sqlutils-package.r'
     'sqlPaths.r'

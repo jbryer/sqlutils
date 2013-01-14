@@ -47,6 +47,7 @@ sqlexec <- function(connection, sql, ...) { UseMethod("sqlexec") }
 #' @S3method sqlexec RODBC
 #' @export
 sqlexec.RODBC <- function(connection, sql, ...) {
+	require(RODBC)
 	sqlQuery(connection, sql) #TODO: Why doesn't this work with ... passed through
 }
 
@@ -60,6 +61,7 @@ sqlexec.RODBC <- function(connection, sql, ...) {
 #' @S3method sqlexec SQLiteConnection
 #' @export
 sqlexec.SQLiteConnection <- function(connection, sql, ...) {
+	require(RSQLite)
 	dbGetQuery(connection, sql, ...)
 }
 
@@ -73,5 +75,21 @@ sqlexec.SQLiteConnection <- function(connection, sql, ...) {
 #' @S3method sqlexec RMySQL
 #' @export
 sqlexec.RMySQL <- function(connection, sql, ...) {
+	require(RMySQL)
 	dbSendQuery(connection, sql, ...)
+}
+
+#' Executes queries for RPostgreSQL
+#' 
+#' @param connection the database connection.
+#' @param sql the query to execute.
+#' @param ... other parameters passed to the appropriate \code{sqlexec} function.
+#' @return a data frame.
+#' @method sqlexec RPostgreSQL
+#' @S3method sqlexec RPostgreSQL
+#' @export
+sqlexec.PostgreSQLConnection <- function(connection, sql, ...) {
+	require(RPostgreSQL)
+	rs <- dbSendQuery(connection, sql)
+	fetch(rs, n=-1)
 }
