@@ -60,6 +60,9 @@ sqldoc <- function(query) {
 #' Prints the SQL documentation.
 #' @param x sqldoc object.
 #' @param ... currently unused.
+#' @S3method print sqldoc
+#' @method print sqldoc
+#' @rdname print
 #' @export
 print.sqldoc <- function(x, ...) {
 	cat(x$introduction)
@@ -119,6 +122,8 @@ is.null.string <- function(string) {
 }
 
 #' Utility function
+#' @param a parameter
+#' @param b parameter
 #' @rdname percentor
 #' @name percentor
 "%||%" <- function(a, b) {

@@ -48,10 +48,11 @@ isql <- function(conn, sql = character(), ...) {
 			if(is.null(df)) {
 				cat('No data frame to save. Try exec first.')
 			} else {
-				dfname <- 'sql.results'
+				dfname <- 'results'
 				if(nchar(line) > 6) {
 					dfname <- substr(line, 6, nchar(line))
 				}
+				assign(paste(dfname, '.sql', sep=''), sql, envir=.GlobalEnv)
 				assign(dfname, df, envir=.GlobalEnv)
 				cat(paste('Data frame ', dfname, ' saved to global environment\n', sep=''))
 			}

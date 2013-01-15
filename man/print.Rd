@@ -2,7 +2,7 @@
 \alias{print.sqldoc}
 \title{Prints the SQL documentation.}
 \usage{
-  print.sqldoc(x, ...)
+  \method{print}{sqldoc} (x, ...)
 }
 \arguments{
   \item{x}{sqldoc object.}

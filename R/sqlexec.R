@@ -85,8 +85,8 @@ sqlexec.RMySQL <- function(connection, sql, ...) {
 #' @param sql the query to execute.
 #' @param ... other parameters passed to the appropriate \code{sqlexec} function.
 #' @return a data frame.
-#' @method sqlexec RPostgreSQL
-#' @S3method sqlexec RPostgreSQL
+#' @method sqlexec PostgreSQLConnection
+#' @S3method sqlexec PostgreSQLConnection
 #' @export
 sqlexec.PostgreSQLConnection <- function(connection, sql, ...) {
 	require(RPostgreSQL)

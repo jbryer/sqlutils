@@ -1,0 +1,12 @@
+CHANGES IN R VERSION 1.0.1
+  NEW FEATURES:
+
+  BUG FIXES:
+
+CHANGES IN R VERSION 1.0
+  NEW FEATURES:
+   o Initial version!
+   o Provides a framework for managing a library of SQL files.
+   o Supports RSQLite, RODBC, RMySQL, and RPostgreSQL.
+   o Interactive SQL mode to enter SQL commands and execute them against a database without leaving R.
+   o Data dictionary template.

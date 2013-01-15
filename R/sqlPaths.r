@@ -5,6 +5,8 @@
 #' @export
 sqlPaths <- function(path, replace=FALSE) {
 	pkgEnv <- pos.to.env(match('package:sqlutils', search()))
+	#Calling unlockBinding will cause a Note when checking the package, but
+	#there seems to be no other way to change this variable
 	try(unlockBinding("sqlrepos", pkgEnv))
 	paths <- unlist(mget("sqlrepos", envir=pkgEnv, 
 			ifnotfound=list(paste(system.file(package='sqlutils'), '/data', sep=''))))
@@ -21,6 +23,7 @@ sqlPaths <- function(path, replace=FALSE) {
 }
 
 #' Returns the full path to the query or NULL if not found.
+#' 
 #' @param query the query to find.
 #' @return path to the query file.
 sqlFile <- function(query) {

@@ -1,13 +1,9 @@
 require(sqlutils)
 require(RSQLite)
-require(retention)
 
-data(students)
-students$CreatedDate = as.character(students$CreatedDate)
+sqlfile <- paste(system.file(package='sqlutils'), '/db/students.db', sep='')
 m <- dbDriver("SQLite")
-tmpfile <- tempfile('students.db', fileext='.db')
-conn <- dbConnect(m, dbname=tmpfile)
-dbWriteTable(conn, "students", students[!is.na(students$CreatedDate),])
+conn <- dbConnect(m, dbname=sqlfile)
 
 hist <- isql(conn=conn, sql=getSQL('StudentSummary'))
 names(hist)

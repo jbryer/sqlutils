@@ -6,13 +6,13 @@
 #' @title Utilities for working with SQL files.
 #' @author Jason Bryer \email{jason@@bryer.org}
 #' @keywords package database sql
-#' @import sqldf roxygen2
 NULL
 
+#' The locations of SQL files
 sqlrepos <- NA
 
 .onAttach <- function(libname, pkgname) {
 	pkgEnv = pos.to.env(match('package:sqlutils', search()))	
-	assign("sqlrepos", value=c(paste(system.file(package='sqlutils'), '/data', sep='')), 
+	assign("sqlrepos", value=c(paste(system.file(package='sqlutils'), '/sql', sep='')), 
 		   envir=pkgEnv)
 }
