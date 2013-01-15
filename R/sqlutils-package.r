@@ -9,10 +9,9 @@
 NULL
 
 #' The locations of SQL files
-sqlrepos <- NA
+sqlutils.envir <- new.env()
 
 .onAttach <- function(libname, pkgname) {
-	pkgEnv = pos.to.env(match('package:sqlutils', search()))	
 	assign("sqlrepos", value=c(paste(system.file(package='sqlutils'), '/sql', sep='')), 
-		   envir=pkgEnv)
+		   envir=sqlutils.envir)
 }

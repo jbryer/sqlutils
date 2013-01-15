@@ -2,12 +2,15 @@
 \alias{isql}
 \title{Interactive SQL session.}
 \usage{
-  isql(conn, sql = character(), ...)
+  isql(conn, sql = character(), envir = baseenv(), ...)
 }
 \arguments{
   \item{conn}{a database connection.}
 
   \item{sql}{initial SQL statement.}
+
+  \item{envir}{the environment to save data frames when
+  executing \code{save}.}
 
   \item{...}{other parameters passed to
   \code{\link{sqlexec}}.}

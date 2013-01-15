@@ -4,11 +4,7 @@
 #' @param replace if FALSE, the path(s) will be added to already existing list.
 #' @export
 sqlPaths <- function(path, replace=FALSE) {
-	pkgEnv <- pos.to.env(match('package:sqlutils', search()))
-	#Calling unlockBinding will cause a Note when checking the package, but
-	#there seems to be no other way to change this variable
-	try(unlockBinding("sqlrepos", pkgEnv))
-	paths <- unlist(mget("sqlrepos", envir=pkgEnv, 
+	paths <- unlist(mget("sqlrepos", envir=sqlutils.envir, 
 			ifnotfound=list(paste(system.file(package='sqlutils'), '/data', sep=''))))
 	if(!missing(path)) {
 		path <- normalizePath(path.expand(path), mustWork=FALSE)
@@ -17,7 +13,7 @@ sqlPaths <- function(path, replace=FALSE) {
 		} else {
 			paths <- unique(c(path, paths))
 		}
-		assign("sqlrepos", value=paths, envir=pkgEnv)
+		assign("sqlrepos", value=paths, envir=sqlutils.envir)
 	}
 	return(unname(paths))
 }

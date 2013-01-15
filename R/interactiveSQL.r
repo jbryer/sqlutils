@@ -6,11 +6,12 @@
 #' 
 #' @param conn a database connection.
 #' @param sql initial SQL statement.
+#' @param envir the environment to save data frames when executing \code{save}.
 #' @param ... other parameters passed to \code{\link{sqlexec}}.
 #' @return returns a list containing two character vectors, one with a history of
 #'        commands and another with a history of SQL statements.
 #' @export
-isql <- function(conn, sql = character(), ...) {
+isql <- function(conn, sql = character(), envir=baseenv(), ...) {
 	cat('Interactive SQL mode (type quit to exit, help for available commands)...\n')
 	
 	df <- NULL
@@ -52,8 +53,8 @@ isql <- function(conn, sql = character(), ...) {
 				if(nchar(line) > 6) {
 					dfname <- substr(line, 6, nchar(line))
 				}
-				assign(paste(dfname, '.sql', sep=''), sql, envir=.GlobalEnv)
-				assign(dfname, df, envir=.GlobalEnv)
+				assign(paste(dfname, '.sql', sep=''), sql, envir=envir)
+				assign(dfname, df, envir=envir)
 				cat(paste('Data frame ', dfname, ' saved to global environment\n', sep=''))
 			}
 		} else if(line == 'result') {

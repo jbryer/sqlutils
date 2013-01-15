@@ -1,10 +1,10 @@
 \docType{data}
-\name{sqlrepos}
-\alias{sqlrepos}
+\name{sqlutils.envir}
+\alias{sqlutils.envir}
 \title{The locations of SQL files}
-\format{logi NA}
+\format{<environment: 0x7fe16c469ae8>}
 \usage{
-  sqlrepos
+  sqlutils.envir
 }
 \description{
   The locations of SQL files

@@ -121,11 +121,6 @@ is.null.string <- function(string) {
 	str_length(str_trim(string)) == 0
 }
 
-#' Utility function
-#' @param a parameter
-#' @param b parameter
-#' @rdname percentor
-#' @name percentor
 "%||%" <- function(a, b) {
 	if (!is.null(a)) a else b
 }
