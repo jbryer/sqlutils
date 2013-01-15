@@ -14,7 +14,7 @@ require(xtable)
 sqlfile <- paste(system.file(package='sqlutils'), '/db/students.db', sep='')
 m <- dbDriver("SQLite")
 conn <- dbConnect(m, dbname=sqlfile)
-sqlPaths(paste(system.file(package='sqlutils'), '/data', sep=''), replace=TRUE)
+sqlPaths(paste(system.file(package='sqlutils'), '/sql', sep=''), replace=TRUE)
 queries <- getQueries()
 nlevels <- 10
 
