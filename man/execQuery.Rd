@@ -13,7 +13,8 @@ execute the SQL statement using the appropriate database connection.}
   \item{connection}{the database connection.}
 
   \item{maxLevels}{the maximum number of levels a factor
-  can have before being converted to a character.}
+  can have before being converted to a character. Set to
+  \code{NULL} to not recode.}
 
   \item{...}{other parameters passed to
   \code{\link{getSQL}} and \code{\link{sqlexec}}.}

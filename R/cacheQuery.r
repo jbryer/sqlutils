@@ -1,3 +1,5 @@
+#' Function for working with cached queries.
+#' 
 #' This will first look in the given directory for a CSV version of the file, if
 #' it exists, that will be read and returned. Otherwise it will execute the query
 #' and then saves a CSV file.
@@ -7,8 +9,8 @@
 #' @param filename the filename of the cached data file.
 #' @param query the query to execute.
 #' @param maxLevels the maximum number of levels a factor can have before being
-#'        converted to a character.
-#' @param ... other parameters passed to the \code{execQuery} function including
+#'        converted to a character vector.
+#' @param ... other parameters passed to the \code{\link{execQuery}} function including
 #'        query parameters.
 #' @param format either csv for comma separated value files or rda for R data files.
 #' @return a data frame.

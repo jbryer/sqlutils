@@ -5,14 +5,17 @@
 #' @param query the query to execute.
 #' @param connection the database connection.
 #' @param maxLevels the maximum number of levels a factor can have before being
-#'        converted to a character.
+#'        converted to a character. Set to \code{NULL} to not recode.
 #' @param ... other parameters passed to \code{\link{getSQL}} and \code{\link{sqlexec}}.
 #' @seealso sqlexec, cacheQuery
 #' @export
 execQuery <- function(query=NULL, connection=NULL, maxLevels=20, ...) {
 	sql = getSQL(query=query, ...)
 	df <- sqlexec(connection, sql=sql, ...)
-	return(recodeColumns(df, maxLevels))
+	if(!is.null(maxLevels)) {
+		df <- recodeColumns(df, maxLevels)
+	}
+	return(df)
 }
 
 #' Recodes factors with more than \code{maxLevels} to characters.
@@ -20,7 +23,7 @@ execQuery <- function(query=NULL, connection=NULL, maxLevels=20, ...) {
 #' @param maxLevels the maximum number of levels a factor can have before being
 #'        converted to a character.
 recodeColumns <- function(df, maxLevels=20) {
-	for(c in 1:ncol(df)) {
+	for(c in seq_len(ncol(df))) {
 		if(class(df[,c])[1] == 'factor' & length(levels(df[,c])) > maxLevels) {
 			df[,c] = as.character(df[,c])
 		}
