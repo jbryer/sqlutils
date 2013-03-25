@@ -61,6 +61,13 @@ getCacheFilename <- function(query, dir=getwd(), ext='csv', ...) {
 			filename = paste(filename, parms[i], parmvals[parms[i]], sep='.')
 		}
 	}
+	if(nchar(filename) >= 251) {
+		warning(paste0('The cached filename is longer than 255 characters. ',
+			'This will cause an error on some operating systems. Consider ',
+			'specifying your own filename parameter. The filename will be ',
+			'truncated to 255 characters.'))
+		filename <- substr(filename, 1, 251)
+	}
 	filename = paste(filename, ext, sep='.')
 	return(filename)
 }
