@@ -4,7 +4,7 @@
 \usage{
   cacheQuery(query = NULL, dir = getwd(),
     filename = getCacheFilename(query = query, dir = dir, ext = format, ...),
-    format = "csv", maxLevels = 20, ...)
+    format = "rda", maxLevels = 20, ...)
 }
 \arguments{
   \item{dir}{the directory to save and load cached data
@@ -22,8 +22,8 @@
   \code{\link{execQuery}} function including query
   parameters.}
 
-  \item{format}{either csv for comma separated value files
-  or rda for R data files.}
+  \item{format}{either \code{csv} for comma separated value
+  files or \code{rda} for R data files.}
 }
 \value{
   a data frame.

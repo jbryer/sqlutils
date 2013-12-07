@@ -5,7 +5,7 @@
 #'         and \code{params} (as a data frame).
 #' @export
 sqldoc <- function(query) {
-	f <- sqlutils:::sqlFile(query)
+	f <- sqlFile(query)
 	if(is.null(f)) { stop(paste("Cannot find query file for ", query, sep='')) }
 	
 	sql = scan(f, what="character", 
@@ -28,7 +28,7 @@ sqldoc <- function(query) {
 	joined.lines <- str_c(trimmed.lines, collapse = '\n')
 	elements <- strsplit(joined.lines, '(?<!@)@(?!@)', perl = TRUE)[[1]]
 	elements <- str_replace_all(elements, fixed("@@"), "@")
-	parsed.introduction <- roxygen2:::parse.introduction(elements[[1]])
+	parsed.introduction <- parse.introduction(elements[[1]])
 	parsed.elements <- unlist(lapply(elements[-1], parse.element), recursive = FALSE)
 	
 	sqldoc <- c(parsed.introduction, parsed.elements)
@@ -87,9 +87,10 @@ print.sqldoc <- function(x, ...) {
 #' @author yihui
 parse.element <- function(element, srcref) {
 	#TODO: This should only be done once when the package loads
-	preref.parsers <- roxygen2:::preref.parsers
-	preref.parsers[['default']] <- preref.parsers[['param']]
-	preref.parsers[['return']] <- preref.parsers[['param']]
+	preref.parsers <- new.env(parent=emptyenv())
+ 	preref.parsers[['default']] <- parse.name.description
+ 	preref.parsers[['return']] <- parse.name.description
+	preref.parsers[['param']] <- parse.name.description
 	
 	pieces <- str_split_fixed(element, "[[:space:]]+", 2)
 	

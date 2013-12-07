@@ -29,7 +29,7 @@ getSQL('StudentsInRange')
 #Cache query
 fn <- tempfile(fileext='.rda')
 q3 <- cacheQuery('StudentSummary', filename=fn, connection=conn)
-names(q4); nrow(q3)
+names(q3); nrow(q3)
 
 #Since this will read from the cache, we don't need to specify the connection.
 q4 <- cacheQuery('StudentSummary', filename=fn) 

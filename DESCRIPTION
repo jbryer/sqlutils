@@ -1,8 +1,8 @@
 Package: sqlutils
 Type: Package
 Title: Utilities for working with SQL files.
-Version: 1.1
-Date: 2013-01-14
+Version: 1.1.1
+Date: 2013-12-07
 Author: Jason Bryer
 Maintainer: Jason Bryer <jason@bryer.org>
 URL: http://jason.bryer.org/sqlutils, http://github.com/jbryer/sqlutils

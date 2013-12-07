@@ -12,12 +12,12 @@
 #'        converted to a character vector.
 #' @param ... other parameters passed to the \code{\link{execQuery}} function including
 #'        query parameters.
-#' @param format either csv for comma separated value files or rda for R data files.
+#' @param format either \code{csv} for comma separated value files or \code{rda} for R data files.
 #' @return a data frame.
 #' @export
 cacheQuery <- function(query=NULL, dir=getwd(), 
 					   filename=getCacheFilename(query=query, dir=dir, ext=format, ...), 
-					   format='csv', 
+					   format='rda', 
 					   maxLevels=20, 
 					   ...) {
 	if(file.exists(filename)) {

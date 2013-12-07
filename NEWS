@@ -1,3 +1,7 @@
+CHANGES IN R VERSION 1.1.1
+   o Fixes to pass new R CMD CHECK errors and changes to the roxygen2 package.
+   o Changed the default file format for cacheQuery to rda.
+
 CHANGES IN R VERSION 1.1
   NEW FEATURES:
    o If the maxLevels parameter on execQuery is NULL, then the recode function will not be called.

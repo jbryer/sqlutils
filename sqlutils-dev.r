@@ -4,8 +4,9 @@ setwd("~/Dropbox/Projects/")
 ## Build functions
 document('sqlutils')
 check_doc('sqlutils')
-install('sqlutils')
-check('sqlutils')
+install('sqlutils', build_vignettes=FALSE)
+build_vignettes('sqlutils')
+check('sqlutils', cran=TRUE)
 
 release('sqlutils')
 
