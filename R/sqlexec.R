@@ -47,7 +47,6 @@ sqlexec <- function(connection, sql, ...) { UseMethod("sqlexec") }
 #' @param ... other parameters passed to the appropriate \code{sqlexec} function.
 #' @return a data frame.
 #' @method sqlexec RODBC
-#' @S3method sqlexec RODBC
 #' @export
 sqlexec.RODBC <- function(connection, sql, ...) {
 	require(RODBC)
@@ -61,7 +60,6 @@ sqlexec.RODBC <- function(connection, sql, ...) {
 #' @param ... other parameters passed to the appropriate \code{sqlexec} function.
 #' @return a data frame.
 #' @method sqlexec SQLiteConnection
-#' @S3method sqlexec SQLiteConnection
 #' @export
 sqlexec.SQLiteConnection <- function(connection, sql, ...) {
 	require(RSQLite)
@@ -75,7 +73,6 @@ sqlexec.SQLiteConnection <- function(connection, sql, ...) {
 #' @param ... other parameters passed to the appropriate \code{sqlexec} function.
 #' @return a data frame.
 #' @method sqlexec RMySQL
-#' @S3method sqlexec RMySQL
 #' @export
 sqlexec.RMySQL <- function(connection, sql, ...) {
 	require(RMySQL)
@@ -89,7 +86,6 @@ sqlexec.RMySQL <- function(connection, sql, ...) {
 #' @param ... other parameters passed to the appropriate \code{sqlexec} function.
 #' @return a data frame.
 #' @method sqlexec PostgreSQLConnection
-#' @S3method sqlexec PostgreSQLConnection
 #' @export
 sqlexec.PostgreSQLConnection <- function(connection, sql, ...) {
 	require(RPostgreSQL)

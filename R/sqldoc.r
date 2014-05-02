@@ -60,7 +60,6 @@ sqldoc <- function(query) {
 #' Prints the SQL documentation.
 #' @param x sqldoc object.
 #' @param ... currently unused.
-#' @S3method print sqldoc
 #' @method print sqldoc
 #' @rdname print
 #' @export
@@ -86,6 +85,17 @@ print.sqldoc <- function(x, ...) {
 #' @return A list containing the parsed constituents
 #' @author yihui
 parse.element <- function(element, srcref) {
+	# From an old version of roxygen2
+	parse.name.description <- function(key, rest, srcref) {
+		pieces <- str_split_fixed(rest, "[[:space:]]+", 2)
+		name <- pieces[, 1]
+		rest <- str_trim(pieces[, 2])
+		if(is.null.string(name)) {
+			stop(paste0(key, " requires a name and description: ", srcref))
+		}
+		list(name = name, description = rest)
+	}
+	
 	#TODO: This should only be done once when the package loads
 	preref.parsers <- new.env(parent=emptyenv())
  	preref.parsers[['default']] <- parse.name.description
@@ -97,8 +107,11 @@ parse.element <- function(element, srcref) {
 	tag <- pieces[, 1]
 	rest <- pieces[, 2]
 	
-	tag_parser <- preref.parsers[[tag]] %||% parse.unknown 
-	tag_parser(tag, rest, NULL)
+	#tag_parser <- preref.parsers[[tag]] %||% parse.unknown 
+	tag_parser <- preref.parsers[[tag]]
+	res <- list(tag_parser(tag, rest, NULL))
+	names(res) <- tag
+	return(res)
 }
 
 #' Parse introduction: the premier part of a roxygen block

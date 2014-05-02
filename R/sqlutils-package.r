@@ -6,6 +6,9 @@
 #' @title Utilities for working with SQL files.
 #' @author Jason Bryer \email{jason@@bryer.org}
 #' @keywords package database sql
+#' @import DBI
+#' @import roxygen2
+#' @import stringr
 NULL
 
 #' The locations of SQL files

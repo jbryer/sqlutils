@@ -1,15 +1,18 @@
-CHANGES IN R VERSION 1.1.1
+CHANGES IN VERSION 1.1.2
+   o Updates for compatibility with roxygen2 version 4.0
+
+CHANGES IN VERSION 1.1.1
    o Fixes to pass new R CMD CHECK errors and changes to the roxygen2 package.
    o Changed the default file format for cacheQuery to rda.
 
-CHANGES IN R VERSION 1.1
+CHANGES IN VERSION 1.1
   NEW FEATURES:
    o If the maxLevels parameter on execQuery is NULL, then the recode function will not be called.
 
   BUG FIXES:
    o Fixed recoding of columns to not fail if the query returned no columns.
 
-CHANGES IN R VERSION 1.0
+CHANGES IN VERSION 1.0
   NEW FEATURES:
    o Initial version!
    o Provides a framework for managing a library of SQL files.

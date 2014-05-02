@@ -1,8 +1,8 @@
 #' Function for working with cached queries.
 #' 
-#' This will first look in the given directory for a CSV version of the file, if
+#' This will first look in the given directory for a CSV or Rda version of the file, if
 #' it exists, that will be read and returned. Otherwise it will execute the query
-#' and then saves a CSV file.
+#' and then saves a CSV or Rda file.
 #' 
 #' @param dir the directory to save and load cached data files. Defaults to the
 #'        current working directory (i.e. \code{\link{getwd}}.
