@@ -1,3 +1,6 @@
+CHANGES IN VERSION 1.2
+   o Added support for RJDBC database connections.
+
 CHANGES IN VERSION 1.1.2
    o Updates for compatibility with roxygen2 version 4.0
 
