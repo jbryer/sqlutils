@@ -1,8 +1,8 @@
 Package: sqlutils
 Type: Package
 Title: Utilities for working with SQL files.
-Version: 1.1.2
-Date: 2014-05-01
+Version: 1.2
+Date: 2014-09-24
 Author: Jason Bryer
 Maintainer: Jason Bryer <jason@bryer.org>
 URL: http://jason.bryer.org/sqlutils, http://github.com/jbryer/sqlutils
@@ -21,4 +21,5 @@ Suggests:
     RMySQL,
     RSQLite,
     sqldf,
-    xtable
+    xtable,
+    RJDBC

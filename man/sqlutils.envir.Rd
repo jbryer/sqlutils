@@ -3,7 +3,7 @@
 \name{sqlutils.envir}
 \alias{sqlutils.envir}
 \title{The locations of SQL files}
-\format{\preformatted{<environment: 0x7f93a6ae7b88> 
+\format{\preformatted{<environment: 0x7f82946dd040> 
 }}
 \usage{
 sqlutils.envir
