@@ -10,6 +10,9 @@ sqldoc <- function(query) {
 	
 	sql = scan(f, what="character", 
 			   sep=';', multi.line=FALSE, comment.char=c(""), quiet=TRUE, quote=NULL)
+    for(i in seq_along(sql)){
+        sql[i] <- gsub("--'", "#'", sql[i])
+    }
 	l <- c()
 	for(i in seq_along(sql)) {
 		if(substr(sql[1], 1,2) == "#'") {
