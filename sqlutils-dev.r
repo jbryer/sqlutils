@@ -6,6 +6,7 @@ document('sqlutils')
 check_doc('sqlutils')
 install('sqlutils', build_vignettes=FALSE)
 build_vignettes('sqlutils')
+build('sqlutils')
 check('sqlutils', cran=TRUE)
 
 release('sqlutils')

@@ -1,3 +1,8 @@
+utils::globalVariables(c('tclvalue','tkget','tkdestroy','tktoplevel','tkpack',
+						 'tklabel','tklabel','tktext','tkmark.set','tkinsert',
+						 'tkfocus','tkbind','tkgrab.release','tkwait.window',
+						 'tkbutton'))
+
 #' Interactive SQL session.
 #' 
 #' This function will start an interactive SQL session. The user can enter SQL
@@ -12,6 +17,8 @@
 #'        commands and another with a history of SQL statements.
 #' @export
 isql <- function(conn, sql = character(), envir=baseenv(), ...) {
+	library(tcltk)
+	
 	cat('Interactive SQL mode (type quit to exit, help for available commands)...\n')
 	
 	df <- NULL

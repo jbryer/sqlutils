@@ -7,9 +7,9 @@
 \lstset{breaklines=true}
 
 <<setup,results=hide,echo=FALSE>>=
-require(sqlutils)
-require(RSQLite)
-require(xtable)
+library(sqlutils)
+library(RSQLite)
+library(xtable)
 
 sqlfile <- paste(system.file(package='sqlutils'), '/db/students.db', sep='')
 m <- dbDriver("SQLite")
@@ -116,6 +116,5 @@ for(q in seq_along(queries)) {
 }
 
 @
-
 
 \end{document}

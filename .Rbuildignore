@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 readme.md
 sqlutils-dev.r
+cran-comments.md

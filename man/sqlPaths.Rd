@@ -3,7 +3,7 @@
 \alias{sqlPaths}
 \title{Search paths for SQL repositories.}
 \usage{
-sqlPaths(path, replace = FALSE)
+sqlPaths(path, replace = TRUE)
 }
 \arguments{
 \item{path}{new path to add. This can a character vector of length greater than 1.}
