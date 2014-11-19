@@ -2,8 +2,9 @@
 
 The `sqlutils` package provides a set of utility functions to help manage a library of structured query language (SQL) files. The package can be installed from Github using the `devtools` package.
 
-	require(devtools)
-	install_github('sqlutils', 'jbryer')
+```R
+devtools::install_github('jbryer/sqlutils')
+```
 
 The `sqlutils` package provides functions to document, cache, and execute SQL queries. The location of the SQL files is determined by the `sqlPaths()` function. This function behaves in a manner consistent with the `.libPaths()` function.
 By default, a single path will be defined being the `data` directory where the `sqlutils` package is installed.
@@ -83,8 +84,9 @@ There are two functions available to execute queries, `execQuery` and `cacheQuer
 
 The `sqlutils` package supports database access using the [`RODBC`](http://cran.r-project.org/web/packages/RODBC/index.html), [`RSQLite`](http://cran.r-project.org/web/packages/RSQLite/index.html), [`RPostgreSQL`](http://cran.r-project.org/web/packages/RPostgreSQL/index.html), and [`RMySQL`](http://cran.r-project.org/web/packages/RMySQL/index.html) packages using an S3 generic function call called `sqlexec` based upon the class of the `connection` parameter. For example, create a new database connection for connections of class `foo`, the following provides the skeleton of the function to implement:
 
-	sqlexec.foo <- function(connection, sql, ...) {
-		#Database implementation here.
-		#The ... will be passed through from the execQuery call. 
-	}
-	
+```R
+sqlexec.foo <- function(connection, sql, ...) {
+	#Database implementation here.
+	#The ... will be passed through from the execQuery call. 
+}
+```	
