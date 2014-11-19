@@ -35,17 +35,3 @@ getSQL <- function(query=NULL, ...) {
 	}
 	return(sql)
 }
-
-#' Returns the SQL from the file without the parameters replaced.
-#' 
-#' @param query the query name.
-#' @return the unedited SQL statement.
-getSQLRaw <- function(query) {
-	f <- sqlFile(query)
-	if(is.null(f)) { stop(paste("Cannot find query file for ", query, sep='')) }
-	
-	sql <- scan(f, what="character", sep=';', multi.line=FALSE, 
-				comment.char=c("#"), quiet=TRUE, quote=NULL)
-	sql <- paste(sql, collapse=" ")
-	return(sql)
-}
